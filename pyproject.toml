@@ -5,11 +5,3 @@ description = "Synthetic-to-real diffusion bridge pipeline and tools."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
-
-[build-system]
-requires = ["setuptools>=61"]
-build-backend = "setuptools.build_meta"
-
-[tool.uv]
-package = "syn-via-diff-2-real"
-python = "3.12" 
