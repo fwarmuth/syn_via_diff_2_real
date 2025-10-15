@@ -40,6 +40,27 @@ uv run python -m syn_via_diff.pipeline \
 
 The CLI assumes paired images and masks with matching filenames and will mirror the input folder structure under the output directory.
 
+### Repository layout
+
+```
+syn_via_diff/
+├─ syn_via_diff/             # Core library (config schema, pipeline, ControlNet runner, etc.)
+├─ configs/                  # YAML configurations for generation and LoRA training
+├─ scripts/                  # Utility entry points (LoRA training, tiled inference, metrics)
+├─ tests/                    # Unit tests for dataset pairing and mask validation
+└─ Makefile                  # Convenience targets for common workflows
+```
+
+Useful commands:
+
+```bash
+make gen    # run the batch pipeline defined in configs/default.yaml
+make lora   # train a LoRA adapter using scripts/train_lora.py
+make fid    # compute FID between generated and reference folders
+make qa     # build mask-overlay QA panels for quick inspection
+make test   # execute the lightweight unit tests
+```
+
 ## Assumptions & Limitations
 - Synthetic inputs and masks are perfectly aligned and share resolution; masks are not resized or warped.
 - Diffusion checkpoints and configurations are provided by the user; the repo does not ship large model weights.
