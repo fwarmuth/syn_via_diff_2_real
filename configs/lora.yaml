@@ -1,0 +1,11 @@
+base_model: runwayml/stable-diffusion-v1-5
+instance_data_dir: data/real_samples/images
+output_dir: artifacts/lora/bin_real_style
+prompt: "photo of an industrial parts bin, realistic lighting"
+resolution: 512
+learning_rate: 0.0001
+train_batch_size: 1
+max_train_steps: 400
+gradient_accumulation_steps: 1
+rank: 8
+seed: 42

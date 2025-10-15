@@ -1,0 +1,37 @@
+data:
+  input_dir: data/synthetic/images
+  mask_dir: data/synthetic/masks
+  output_dir: data/realistic/images
+  output_mask_dir: data/realistic/masks
+  recursive: true
+  patterns: ["*.png", "*.jpg"]
+model:
+  base: runwayml/stable-diffusion-v1-5
+  controlnet: lllyasviel/sd-controlnet-seg
+  lora_path: artifacts/lora/bin_real_style.safetensors
+  lora_weight: 0.7
+  dtype: fp16
+  device: cuda
+infer:
+  num_inference_steps: 34
+  guidance_scale: 7.5
+  controlnet_conditioning_scale: 1.0
+  denoising_strength: 0.4
+  seed: 123
+prompts:
+  positive: "photo of a warehouse bin with mixed materials under factory lighting, realistic texture, sharp details"
+  negative: "blurry, low quality, artifacts, oversaturated"
+  bank:
+    - "photo of an industrial storage bin lit by cool white LEDs, realistic materials"
+    - "warehouse bin filled with metallic parts under fluorescent lights, realistic look"
+    - "factory storage crate with mixed hardware, natural lighting, photorealistic"
+eval:
+  compute_fid: true
+  real_ref_dir: data/real_ref/images
+  sample_limit: 500
+  check_alignment: true
+  iou_threshold: 0.999
+logging:
+  write_metadata: true
+  save_grid_every: 50
+  verbose: true
